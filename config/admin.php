@@ -234,6 +234,10 @@ return [
      * 扩展设置.
      */
     'extensions' => [
-
+        'login-captcha' => [
+            // set to false if you want to disable this extension
+            'enable' => true,
+        ]
     ],
+
 ];

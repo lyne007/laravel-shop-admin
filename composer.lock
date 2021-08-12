@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "adf6a392b2cccd50f5b7e1d85240fd01",
+    "content-hash": "a2caa43b7618a4f6399601639ffdddff",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1463,6 +1463,166 @@
             "time": "2021-06-30T20:03:07+00:00"
         },
         {
+            "name": "intervention/image",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "0925f10b259679b5d8ca58f3a2add9255ffcda45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/0925f10b259679b5d8ca58f3a2add9255ffcda45",
+                "reference": "0925f10b259679b5d8ca58f3a2add9255ffcda45",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/2.6.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/interventionphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-22T14:31:53+00:00"
+        },
+        {
+            "name": "james.xue/login-captcha",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xiaoxuan6/login-captcha.git",
+                "reference": "4d20361356f05ac3d15e9338123d01ef0c1cbbc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xiaoxuan6/login-captcha/zipball/4d20361356f05ac3d15e9338123d01ef0c1cbbc5",
+                "reference": "4d20361356f05ac3d15e9338123d01ef0c1cbbc5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": "~1.7",
+                "mews/captcha": "^2.2||^3.0",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Encore\\James\\JamesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Encore\\James\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "xiaoxuan6",
+                    "email": "1527736751@qq.com"
+                }
+            ],
+            "description": "laravel-admin 登录验证码",
+            "homepage": "https://github.com/xiaoxuan6/login-captcha",
+            "keywords": [
+                "extension",
+                "laravel-admin",
+                "login-captcha"
+            ],
+            "support": {
+                "issues": "https://github.com/xiaoxuan6/login-captcha/issues",
+                "source": "https://github.com/xiaoxuan6/login-captcha/tree/2.0.2"
+            },
+            "funding": [
+                {
+                    "url": "http://james.dmzfa.com/about#pay",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-05-10T06:45:43+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v8.53.1",
             "source": {
@@ -2076,6 +2236,85 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "mews/captcha",
+            "version": "3.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mewebstudio/captcha.git",
+                "reference": "42c1b320e4cad1f6ec9a395da36d7eda5b67d122"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/42c1b320e4cad1f6ec9a395da36d7eda5b67d122",
+                "reference": "42c1b320e4cad1f6ec9a395da36d7eda5b67d122",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-gd": "*",
+                "illuminate/config": "~5|^6|^7|^8",
+                "illuminate/filesystem": "~5|^6|^7|^8",
+                "illuminate/hashing": "~5|^6|^7|^8",
+                "illuminate/session": "~5|^6|^7|^8",
+                "illuminate/support": "~5|^6|^7|^8",
+                "intervention/image": "~2.5",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mews\\Captcha\\CaptchaServiceProvider"
+                    ],
+                    "aliases": {
+                        "Captcha": "Mews\\Captcha\\Facades\\Captcha"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mews\\Captcha\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muharrem ERİN",
+                    "email": "me@mewebstudio.com",
+                    "homepage": "https://github.com/mewebstudio",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5 & 6 Captcha Package",
+            "homepage": "https://github.com/mewebstudio/captcha",
+            "keywords": [
+                "captcha",
+                "laravel5 Security",
+                "laravel6 Captcha",
+                "laravel6 Security"
+            ],
+            "support": {
+                "issues": "https://github.com/mewebstudio/captcha/issues",
+                "source": "https://github.com/mewebstudio/captcha/tree/3.2.6"
+            },
+            "time": "2021-04-22T18:42:48+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3365,6 +3604,119 @@
                 }
             ],
             "time": "2021-08-06T22:30:43+00:00"
+        },
+        {
+            "name": "small-rural-dog/store",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SmallRuralDog/laravel-b2c-store.git",
+                "reference": "c4795710990ed7e972326358308d104e737087ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SmallRuralDog/laravel-b2c-store/zipball/c4795710990ed7e972326358308d104e737087ed",
+                "reference": "c4795710990ed7e972326358308d104e737087ed",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": "~1.6",
+                "intervention/image": "^2.4",
+                "php": ">=7.0.0",
+                "smallruraldog/laravel-custom": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SmallRuralDog\\Store\\StoreServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SmallRuralDog\\Store\\": "src/"
+                },
+                "files": [
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "your name"
+                }
+            ],
+            "description": "description...",
+            "homepage": "https://github.com/small-rural-dog/store",
+            "keywords": [
+                "extension",
+                "laravel-admin"
+            ],
+            "support": {
+                "issues": "https://github.com/SmallRuralDog/laravel-b2c-store/issues",
+                "source": "https://github.com/SmallRuralDog/laravel-b2c-store/tree/master"
+            },
+            "time": "2019-03-01T09:45:56+00:00"
+        },
+        {
+            "name": "smallruraldog/laravel-custom",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SmallRuralDog/laravel-custom.git",
+                "reference": "fd51abbc2512ae28193061e39abe5af3ff7a6033"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SmallRuralDog/laravel-custom/zipball/fd51abbc2512ae28193061e39abe5af3ff7a6033",
+                "reference": "fd51abbc2512ae28193061e39abe5af3ff7a6033",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SmallRuralDog\\LaravelCustom\\LaravelCustomServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SmallRuralDog\\LaravelCustom\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "SmallRuralDog",
+                    "email": "296404875@qq.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/SmallRuralDog/laravel-custom/issues",
+                "source": "https://github.com/SmallRuralDog/laravel-custom/tree/master"
+            },
+            "time": "2019-01-24T08:39:52+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8664,123 +9016,7 @@
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/object-reflector/issues",
-                "source": "https://github.com/sebastianbergmann/object-reflector/tree/2.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-10-26T13:14:26+00:00"
-        },
-        {
-            "name": "sebastian/recursion-context",
-            "version": "4.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
-                {
-                    "name": "Jeff Welch",
-                    "email": "whatthejeff@gmail.com"
-                },
-                {
-                    "name": "Adam Harvey",
-                    "email": "aharvey@php.net"
-                }
-            ],
-            "description": "Provides functionality to recursively process PHP variables",
-            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-10-26T13:17:30+00:00"
-        },
-        {
-            "name": "sebastian/resource-operations",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/resource-operations.git",
-                "reference": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8",
-                "reference": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
+                "source": "https://github.com/s: "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
