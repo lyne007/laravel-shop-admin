@@ -1,0 +1,17 @@
+{
+  "ID": "ID",
+  "Created at":"创建时间",
+  "Updated at":"更新时间",
+  "Cate name":"分类名",
+  "Cate parent id":"父级ID",
+  "Status":"状态",
+  "Cate image":"图标",
+  "Sort weight":"排序",
+  "Show index":"显示首页？",
+  "Attribute name":"属性KEY",
+  "Category id":"所属分类",
+  "Attribute values":"属性值",
+  "Attribute value":"属性值",
+  "Attribute id":"属性KEY"
+
+}

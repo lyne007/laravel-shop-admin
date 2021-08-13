@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2caa43b7618a4f6399601639ffdddff",
+    "content-hash": "0bc15e9a1f0768c3ca367cddab7b5d8f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3604,119 +3604,6 @@
                 }
             ],
             "time": "2021-08-06T22:30:43+00:00"
-        },
-        {
-            "name": "small-rural-dog/store",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SmallRuralDog/laravel-b2c-store.git",
-                "reference": "c4795710990ed7e972326358308d104e737087ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SmallRuralDog/laravel-b2c-store/zipball/c4795710990ed7e972326358308d104e737087ed",
-                "reference": "c4795710990ed7e972326358308d104e737087ed",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "encore/laravel-admin": "~1.6",
-                "intervention/image": "^2.4",
-                "php": ">=7.0.0",
-                "smallruraldog/laravel-custom": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SmallRuralDog\\Store\\StoreServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SmallRuralDog\\Store\\": "src/"
-                },
-                "files": [
-                    "helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "your name"
-                }
-            ],
-            "description": "description...",
-            "homepage": "https://github.com/small-rural-dog/store",
-            "keywords": [
-                "extension",
-                "laravel-admin"
-            ],
-            "support": {
-                "issues": "https://github.com/SmallRuralDog/laravel-b2c-store/issues",
-                "source": "https://github.com/SmallRuralDog/laravel-b2c-store/tree/master"
-            },
-            "time": "2019-03-01T09:45:56+00:00"
-        },
-        {
-            "name": "smallruraldog/laravel-custom",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SmallRuralDog/laravel-custom.git",
-                "reference": "fd51abbc2512ae28193061e39abe5af3ff7a6033"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SmallRuralDog/laravel-custom/zipball/fd51abbc2512ae28193061e39abe5af3ff7a6033",
-                "reference": "fd51abbc2512ae28193061e39abe5af3ff7a6033",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SmallRuralDog\\LaravelCustom\\LaravelCustomServiceProvider"
-                    ],
-                    "aliases": []
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SmallRuralDog\\LaravelCustom\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "SmallRuralDog",
-                    "email": "296404875@qq.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/SmallRuralDog/laravel-custom/issues",
-                "source": "https://github.com/SmallRuralDog/laravel-custom/tree/master"
-            },
-            "time": "2019-01-24T08:39:52+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -9016,7 +8903,123 @@
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/object-reflector/issues",
-                "source": "https://github.com/s: "https://packagist.org/downloads/",
+                "source": "https://github.com/sebastianbergmann/object-reflector/tree/2.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-26T13:14:26+00:00"
+        },
+        {
+            "name": "sebastian/recursion-context",
+            "version": "4.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/recursion-context.git",
+                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172",
+                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
+                }
+            ],
+            "description": "Provides functionality to recursively process PHP variables",
+            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-26T13:17:30+00:00"
+        },
+        {
+            "name": "sebastian/resource-operations",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/resource-operations.git",
+                "reference": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8",
+                "reference": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
