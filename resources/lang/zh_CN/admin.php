@@ -116,7 +116,8 @@ return [
         'goodslist'     => '商品',
         'merchants'     => '商户管理',
         'banners'       => 'Banner管理',
-        'vendors'       => '供应商'
+        'vendors'       => '供应商',
+        'brands'        => '品牌'
 
     ],
     'prev'                   => '上一步',

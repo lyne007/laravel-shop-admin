@@ -178,8 +178,9 @@ return [
 
     /*
      * 后台布局
+     * 'sidebar-collapse',
      */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    'layout' => [ 'sidebar-mini'],
 
     /*
      * 登录页背景图

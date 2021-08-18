@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Admin\Banner;
+use App\Models\Admin\Merchant;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -17,23 +18,28 @@ class BannersController extends AdminController
      */
     protected $title = 'Banner';
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
+
     protected function grid()
     {
         $grid = new Grid(new Banner());
 
-        $grid->column('id', __('Id'));
-        $grid->column('merchant_id', __('Merchant id'));
-        $grid->column('b_image', __('B image'));
+        $grid->column('merchant_id', __('Merchant id'))->display(function(){
+            $merchant = Merchant::where('id',$this->merchant_id)->first('m_name');
+            return $merchant?$merchant->m_name:null;
+        });
+        $grid->column('b_image', __('B image'))->image('',50,50);
+        $grid->column('b_href', __('B href'))->display(function(){
+            return '<a href="'.$this->b_href.'" target="__brank">'.$this->b_href.'</a>';
+        });
         $grid->column('b_sort_weight', __('B sort weight'));
-        $grid->column('b_href', __('B href'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->equal('merchant_id', __('Merchant id'))->select(function(){
+                return Merchant::pluck('m_name as text','id');
+            });
+        });
         return $grid;
     }
 
@@ -67,10 +73,18 @@ class BannersController extends AdminController
     {
         $form = new Form(new Banner());
 
-        $form->number('merchant_id', __('Merchant id'));
-        $form->image('b_image', __('B image'))->uniqueName();
-        $form->number('b_sort_weight', __('B sort weight'));
-        $form->text('b_href', __('B href'));
+        $form->select('merchant_id', __('Merchant id'))->options(function(){
+            return Merchant::pluck('m_name as text','id');
+        })->required();
+        $form->image('b_image', __('B image'))->uniqueName()->required();
+        $form->url('b_href', __('B href'))->setWidth(5);
+
+        $form->slider('b_sort_weight', __('B sort weight'))->options([
+            'max'       => 300,
+            'min'       => 1,
+            'step'      => 1,
+            'postfix'   => '排序'
+        ]);
 
         return $form;
     }

@@ -1,4 +1,5 @@
 <?php
+use Encore\Admin\Facades\Admin;
 
 /**
  * Laravel-admin - admin builder based on Laravel.
@@ -19,3 +20,7 @@
  */
 
 //Encore\Admin\Form::forget(['map', 'editor']);
+
+Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
+    $navbar->right(new \App\Admin\Extensions\Nav\Links());
+});

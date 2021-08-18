@@ -20,6 +20,7 @@ Route::group([
     $router->resource('banners', BannersController::class);
     $router->resource('merchants', MerchantsController::class);
     $router->resource('vendors', VendorsController::class);
+    $router->resource('brands', BrandsController::class);
 
     $router->post('/goods/upload-sku','GoodsController@uploadSku')->name('goods.upload-sku');
     $router->post('/goods/upload-details','GoodsController@uploadDetails')->name('goods.upload-details');

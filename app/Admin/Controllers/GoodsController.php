@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
 use App\Models\Admin\Goods;
 use App\Models\Admin\GoodsSku;
@@ -32,7 +33,6 @@ class GoodsController extends AdminController
     {
         $grid = new Grid(new Goods());
 
-        $grid->column('id', __('Id'));
         $grid->column('goods_code', __('Goods code'));
         $grid->column('goods_name', __('Goods name'));
         $grid->column('cate_id_one', __('分类'))->display(function(){
@@ -41,24 +41,33 @@ class GoodsController extends AdminController
             return $cate1->cate_name .'/'.$cate2->cate_name;
         });
 
-//        $grid->column('attribute_list', __('Attribute list'));
         $grid->column('vendor_id', __('Vendor id'))->display(function(){
             $vendor = Vendor::where('id',$this->vendor_id)->first('vendor_name');
             return $vendor->vendor_name;
+        });
+        $grid->column('brand_id', __('Brand id'))->display(function(){
+            $brand = Brand::where('id',$this->brand_id)->first('brand_name');
+            return $brand?$brand->brand_name:null;
         });
         $grid->column('goods_sales', __('Goods sales'));
         $grid->column('goods_main', __('Goods main'))->display(function(){
             return '<img src="'.$this->goods_main.'"/>';
         });
-//        $grid->column('goods_details', __('Goods details'));
         $grid->column('is_hot', __('Is hot'))->using([0=>'否',1=>'是'])->label([1=>'success',0=>'warning']);
         $grid->column('status', __('Status'))->using([0=>'禁用',1=>'正常'])->label([1=>'success',0=>'warning']);
         $grid->column('sort_weight', __('Sort weight'));
-//        $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
             $filter->equal('goods_code',__('Goods code'));
             $filter->equal('goods_name',__('Goods name'));
+            $filter->equal('vendor_id',__('Vendor id'))->select(function (){
+                return Vendor::pluck('vendor_name as text','id');
+            });
+            $filter->equal('brand_id',__('Brand id'))->select(function (){
+                return Brand::pluck('brand_name as text','id');
+            });
+
         });
         return $grid;
     }
@@ -86,6 +95,10 @@ class GoodsController extends AdminController
         $show->field('vendor_id', __('Vendor id'))->as(function(){
             $vendor = Vendor::where('id',$this->vendor_id)->first('vendor_name');
             return $vendor->vendor_name;
+        });
+        $show->field('brand_id', __('Brand id'))->as(function(){
+            $brand = Brand::where('id',$this->brand_id)->first('brand_name');
+            return $brand?$brand->brand_name:null;
         });
         $show->field('sku','商品SKU')->as(function(){
             $sku_json = Goods::getSkus($this->id);
@@ -145,6 +158,9 @@ class GoodsController extends AdminController
         $form->select('cate_id_two', __('Cate id two'))->required();
         $form->select('vendor_id', __('Vendor id'))->options(function(){
             return Vendor::pluck('vendor_name as text','id');
+        })->required();
+        $form->select('brand_id', __('Brand id'))->options(function(){
+            return Brand::pluck('brand_name as text','id');
         })->required();
         $form->sku('sku','商品SKU')->default(function($form){
             if ($form->isEditing()) {

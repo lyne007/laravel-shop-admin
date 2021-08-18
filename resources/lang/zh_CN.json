@@ -24,6 +24,7 @@
     "Goods price": "价格",
     "Goods stock": "库存",
     "Vendor id": "所属供应商",
+    "Brand id": "品牌",
     "Is hot": "是否热卖",
     "Status": "状态",
     "Sort weight": "排序",
@@ -33,8 +34,13 @@
     "M contact": "联系人",
     "M phone": "电话",
     "M email": "邮箱",
-
     "Vendor name": "供应商名称",
     "Contactor": "联系人",
-    "Phone": "电话"
+    "Phone": "电话",
+    "Brand name": "品牌名称",
+    "Desc": "简介",
+    "Merchant id": "所属商户",
+    "B image": "Banner图",
+    "B sort weight": "排序",
+    "B href": "链接"
 }
