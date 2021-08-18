@@ -5,13 +5,14 @@ namespace App\Admin\Controllers;
 use App\Models\Admin\Category;
 use App\Models\Admin\Goods;
 use App\Models\Admin\GoodsSku;
+use App\Models\Admin\Vendor;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Godruoyi\Snowflake\Snowflake;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Mavinoo\Batch\Batch;
 
 class GoodsController extends AdminController
 {
@@ -41,14 +42,17 @@ class GoodsController extends AdminController
         });
 
 //        $grid->column('attribute_list', __('Attribute list'));
-//        $grid->column('vendor_id', __('Vendor id'));
+        $grid->column('vendor_id', __('Vendor id'))->display(function(){
+            $vendor = Vendor::where('id',$this->vendor_id)->first('vendor_name');
+            return $vendor->vendor_name;
+        });
         $grid->column('goods_sales', __('Goods sales'));
         $grid->column('goods_main', __('Goods main'))->display(function(){
             return '<img src="'.$this->goods_main.'"/>';
         });
 //        $grid->column('goods_details', __('Goods details'));
-        $grid->column('is_hot', __('Is hot'));
-        $grid->column('status', __('Status'));
+        $grid->column('is_hot', __('Is hot'))->using([0=>'否',1=>'是'])->label([1=>'success',0=>'warning']);
+        $grid->column('status', __('Status'))->using([0=>'禁用',1=>'正常'])->label([1=>'success',0=>'warning']);
         $grid->column('sort_weight', __('Sort weight'));
 //        $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -69,7 +73,6 @@ class GoodsController extends AdminController
     {
         $show = new Show(Goods::findOrFail($id));
 
-//        $show->field('id', __('Id'));
         $show->field('goods_code', __('Goods code'));
         $show->field('goods_name', __('Goods name'));
         $show->field('cate_id_one', __('Cate id one'))->as(function($cate_id_one){
@@ -80,23 +83,42 @@ class GoodsController extends AdminController
             $cate = Category::where('id',$this->cate_id_two)->first();
             return $cate->cate_name;
         });
-        $show->json('sku','商品SKU')->as(function(){
-            return Goods::getSkus($this->id);
+        $show->field('vendor_id', __('Vendor id'))->as(function(){
+            $vendor = Vendor::where('id',$this->vendor_id)->first('vendor_name');
+            return $vendor->vendor_name;
         });
-//        $show->sku('sku', __('Attribute list'));
-//        $show->field('vendor_id', __('Vendor id'));
-        $show->field('goods_sales', __('Goods sales'));
+        $show->field('sku','商品SKU')->as(function(){
+            $sku_json = Goods::getSkus($this->id);
+            $sku_data = json_decode($sku_json,true);
+            $table = '<div class="box"><div class="box-body"><table class="table table-bordered"><tbody><tr><th>属性/值</th><th>图片</th><th>价格</th><th>库存</th></tr>';
+
+            foreach ($sku_data['sku'] as $sku) {
+                $table .= '<tr>';
+                $temp = $sku;
+                unset($temp['price'],$temp['stock'],$temp['pic'],$temp['id']);
+                $td = '<td>';
+                foreach ($temp as $item=>$value) {
+//                    $td .= '<span style="font-size: 5px">'.$item.'</span>:<label class="label label-default" style="font-size: 13px">'.$value.'</label>';
+                    $td .= '<label class="label label-default" style="font-size: 13px">'.$value.'</label> &nbsp;&nbsp;';
+                }
+                $td .= '</td>';
+                $table .= $td;
+                $table .= '<td><img width="25" height="25" src="'.$sku['pic'].'"></td>';
+                $table .= '<td>'.($sku['price'] / 100).'（元）</td>';
+                $table .= '<td>'.$sku['stock'].'</td>';
+                $table .= '</tr>';
+            }
+            $table .= '</tbody></table></div></div>';
+            return $table;
+        })->setEscape(false);
+
         $show->field('goods_main', __('Goods main'))->image('','100','100');
         $show->field('goods_images', __('Goods images'))->carousel(500,200);
-        $show->field('goods_details', __('Goods details'))->as(function(){
-            return htmlspecialchars($this->goods_details);
-        });
-        $show->field('is_hot', __('Is hot'))->as(function(){
-            return $this->is_hot? '是':'否';
-        });
-        $show->field('status', __('Status'))->as(function(){
-            return $this->status? '正常':'禁用';
-        });
+        $show->field('goods_details', __('Goods details'))->setEscape(false);
+        $show->field('goods_sales', __('Goods sales'));
+        $show->field('is_hot',__('Is hot'))->using([0=>'否',1=>'是']);
+        $show->field('status',__('Status'))->using([0=>'禁用',1=>'正常']);
+
         $show->field('sort_weight', __('Sort weight'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -113,30 +135,35 @@ class GoodsController extends AdminController
     {
 
         $form = new Form(new Goods());
-        $form->text('goods_code', __('Goods code'))->rules('required|numeric|min:100');
-        $form->text('goods_name', __('Goods name'))->rules('required');
-        $form->select('cate_id_one', __('Cate id one'))->options('/admin/api/cate/0')->load('cate_id_two','/admin/api/cate/0');
-        $form->select('cate_id_two', __('Cate id two'));
-
+        $form->text('goods_code', __('Goods code'))->required()->rules('required|numeric|min:100')->default(function () {
+            $snowflake = new Snowflake();
+            return substr($snowflake->id(),5,13);
+        });
+//        $form->text('goods_code', __('Goods code'))->required()->rules('required|numeric|min:100');
+        $form->text('goods_name', __('Goods name'))->required();
+        $form->select('cate_id_one', __('Cate id one'))->options('/admin/api/cate/0')->load('cate_id_two','/admin/api/cate/0')->required();
+        $form->select('cate_id_two', __('Cate id two'))->required();
+        $form->select('vendor_id', __('Vendor id'))->options(function(){
+            return Vendor::pluck('vendor_name as text','id');
+        })->required();
         $form->sku('sku','商品SKU')->default(function($form){
             if ($form->isEditing()) {
                 return Goods::getSkus($form->model()->id);
             }
         });
-        $form->number('vendor_id', __('Vendor id'))->default(1);
         $form->image('goods_main', __('Goods main'))->uniqueName();
         $form->multipleImage('goods_images', __('Goods images'))->uniqueName();
         $form->editor('goods_details',__('Goods Details'));
         $form->radio('status', __('Status'))->options([0 => '禁用', 1=> '正常'])->default(1);
         $form->currency('goods_price', __('Goods price'))->symbol('$');
         $form->number('goods_stock', __('Goods stock'));
-//        $form->number('sort_weight', __('Sort weight'));
         $form->slider('sort_weight', __('Sort weight'))->options([
             'max'       => 300,
             'min'       => 1,
             'step'      => 1,
             'postfix'   => '排序'
         ]);
+
 
         $form->saved(function($form){
 
@@ -146,7 +173,7 @@ class GoodsController extends AdminController
                 $insertGoodsSkus = [];
                 foreach ($goodsSkus as $k=>$sku) {
                     $insertGoodsSkus[$k]['goods_id'] = $form->model()->id;
-                    $insertGoodsSkus[$k]['goods_price'] = $sku->price;
+                    $insertGoodsSkus[$k]['goods_price'] = $sku->price * 100;
                     $insertGoodsSkus[$k]['goods_stock'] = $sku->stock;
                     $insertGoodsSkus[$k]['spec_pic'] = $sku->pic;
                     unset($sku->pic,$sku->price,$sku->stock,$sku->id);

@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Godruoyi\Snowflake\Snowflake;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Goods extends Model
 {
     use HasFactory;
+    // 解决时间格式.000000Z
+    use DefaultDatetimeFormat;
 
     public function skus()
     {
@@ -61,9 +64,6 @@ class Goods extends Model
         static::saving(function ($model) {
 
             $goods = $model->attributes;
-//            if (isset($goods['goods_images'])) {
-//                $goods['goods_images'] = json_encode($goods['goods_images']);
-//            }
             $goods['goods_price'] = $goods['goods_price'] * 100;
             $skuData = json_decode($goods['sku']);
             if ($skuData->type =='many') {
@@ -71,6 +71,9 @@ class Goods extends Model
                 $goods['attribute_list'] = json_encode($skuData->attrs);
             } else {
                 // 单规格price，stock必填
+                if (empty($goods['goods_price']) || empty($goods['goods_price'])) {
+
+                }
             }
             unset($goods['sku']);
             $model->attributes = $goods;

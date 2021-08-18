@@ -2,12 +2,15 @@
 
 namespace App\Models\Admin;
 
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     use ModelTree;
+    // 解决时间格式.000000Z
+    use DefaultDatetimeFormat;
 
     protected $table = 'category';
 

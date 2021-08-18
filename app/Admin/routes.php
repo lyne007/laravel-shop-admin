@@ -17,6 +17,9 @@ Route::group([
     $router->resource('attribute-keys', AttributeKeyController::class);
     $router->resource('attribute-values', AttributeValueController::class);
     $router->resource('goods', GoodsController::class);
+    $router->resource('banners', BannersController::class);
+    $router->resource('merchants', MerchantsController::class);
+    $router->resource('vendors', VendorsController::class);
 
     $router->post('/goods/upload-sku','GoodsController@uploadSku')->name('goods.upload-sku');
     $router->post('/goods/upload-details','GoodsController@uploadDetails')->name('goods.upload-details');

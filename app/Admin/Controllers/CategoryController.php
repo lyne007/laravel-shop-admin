@@ -75,10 +75,10 @@ class CategoryController extends AdminController
         $show->field('id', __('Id'));
         $show->field('cate_name', __('Cate name'));
         $show->field('cate_parent_id', __('Cate parent id'));
-        $show->field('status', __('Status'));
+        $show->column('status', __('Status'))->using([0=>'禁用',1=>'正常'])->label([1=>'success',0=>'warning']);
         $show->field('cate_image', __('Cate image'))->image('','100','100');
         $show->field('sort_weight', __('Sort weight'));
-        $show->field('show_index', __('Show index'));
+        $show->column('show_index', __('Show index'))->using([0=>'否',1=>'是'])->label([1=>'success',0=>'warning']);
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 

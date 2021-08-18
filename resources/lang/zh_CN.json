@@ -21,7 +21,20 @@
     "Goods main":"主图",
     "Goods images":"大图",
     "Goods details": "商品详情",
-    "Is hot":"是否热卖",
+    "Goods price": "价格",
+    "Goods stock": "库存",
+    "Vendor id": "所属供应商",
+    "Is hot": "是否热卖",
     "Status": "状态",
-    "Sort weight": "排序"
+    "Sort weight": "排序",
+    "M code": "商户编码",
+    "M name": "商户名称",
+    "M logo url": "LOGO",
+    "M contact": "联系人",
+    "M phone": "电话",
+    "M email": "邮箱",
+
+    "Vendor name": "供应商名称",
+    "Contactor": "联系人",
+    "Phone": "电话"
 }

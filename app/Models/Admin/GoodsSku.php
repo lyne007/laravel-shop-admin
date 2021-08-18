@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 class GoodsSku extends Model
 {
     use HasFactory;
+    // 解决时间格式.000000Z
+    use DefaultDatetimeFormat;
     protected $table = 'goods_skus';
     protected $primaryKey = 'id';
     public $timestamps = true;

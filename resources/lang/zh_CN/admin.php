@@ -114,8 +114,13 @@ return [
         'attributekey'  => '属性KEY',
         'attributevalue' => '属性值',
         'goodslist'     => '商品',
+        'merchants'     => '商户管理',
+        'banners'       => 'Banner管理',
+        'vendors'       => '供应商'
+
     ],
     'prev'                   => '上一步',
     'next'                   => '下一步',
     'quick_create'           => '快速创建',
+
 ];

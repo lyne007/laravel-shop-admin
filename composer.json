@@ -15,7 +15,7 @@
         "laravel-admin-ext/wang-editor": "1.*",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "lyne007/laravel-admin-sku": "^1.1",
+        "lyne007/laravel-admin-sku": "1.*",
         "mavinoo/laravel-batch": "^2.2"
     },
     "require-dev": {
