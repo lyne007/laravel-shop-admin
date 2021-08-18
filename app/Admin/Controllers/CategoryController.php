@@ -5,7 +5,6 @@ namespace App\Admin\Controllers;
 use App\Models\Admin\Category;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
-use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Encore\Admin\Tree;
@@ -55,7 +54,7 @@ class CategoryController extends AdminController
     {
         $tree = new Tree(new Category);
         $tree->branch(function($branch){
-            $src = config('admin.upload.host') . '/uploads/' . $branch['cate_image'] ;
+            $src = config('admin.upload.host') . $branch['cate_image'] ;
             $logo = "<img src='$src' style='max-width:25px;max-height:25px' class='img'/>";
             return "{$branch['id']} - $logo  - {$branch['cate_name']}";
         });

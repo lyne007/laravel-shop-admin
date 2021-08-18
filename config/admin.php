@@ -95,6 +95,8 @@ return [
             'image' => 'images',
             'file'  => 'files',
         ],
+        'host' =>env('APP_URL').'/uploads/'
+
     ],
 
     /*
@@ -237,6 +239,16 @@ return [
         'login-captcha' => [
             // set to false if you want to disable this extension
             'enable' => true,
+        ],
+        'wang-editor' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
+            // 编辑器的配置
+            'config' => [
+                // https://www.kancloud.cn/wangfupeng/wangeditor3/335776
+                // `/upload`接口用来上传文件，上传逻辑要自己实现，可参考下面的`上传图片`
+                'uploadImgServer' => '/admin/goods/upload-details'
+            ]
         ]
     ],
 

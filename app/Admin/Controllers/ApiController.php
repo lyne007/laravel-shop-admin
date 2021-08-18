@@ -5,7 +5,7 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\AttributeKey;
 use App\Models\Admin\Category;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
@@ -14,10 +14,11 @@ class ApiController extends Controller
      * @param $f 区分返回数据是否需要添加【顶级分类】0不添加
      * @return \Illuminate\Http\JsonResponse
      */
-    public function cate($f = 1)
+    public function cate(Request $request,$f = 1)
     {
+        $q = $request->get('q') ?? 0;
+        $cate = Category::select('id','cate_name as text')->where('cate_parent_id',$q)->get();
 
-        $cate = Category::select('id','cate_name as text')->where('cate_parent_id',0)->get();
         if ($f) {
             $cate1[0]['id'] = 0;
             $cate1[0]['text'] = '顶级分类';

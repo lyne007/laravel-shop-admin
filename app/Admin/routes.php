@@ -18,9 +18,8 @@ Route::group([
     $router->resource('attribute-values', AttributeValueController::class);
     $router->resource('goods', GoodsController::class);
 
-
-    $router->get('/test', 'CategoryController@test')->name('test');
-    $router->get('/goods', 'GoodsController@index')->name('goods.index');
+    $router->post('/goods/upload-sku','GoodsController@uploadSku')->name('goods.upload-sku');
+    $router->post('/goods/upload-details','GoodsController@uploadDetails')->name('goods.upload-details');
 
     // 公用到api
     $router->get('/api/cate/{f?}','ApiController@cate')->name('api.cate');

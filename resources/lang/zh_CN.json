@@ -12,6 +12,16 @@
   "Category id":"所属分类",
   "Attribute values":"属性值",
   "Attribute value":"属性值",
-  "Attribute id":"属性KEY"
-
+  "Attribute id":"属性KEY",
+    "Goods code":"商品编码",
+    "Goods name":"商品名称",
+    "Cate id one":"一级分类",
+    "Cate id two":"二级分类",
+    "Goods sales":"销量",
+    "Goods main":"主图",
+    "Goods images":"大图",
+    "Goods details": "商品详情",
+    "Is hot":"是否热卖",
+    "Status": "状态",
+    "Sort weight": "排序"
 }

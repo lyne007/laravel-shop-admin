@@ -2,11 +2,16 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Admin\Category;
 use App\Models\Admin\Goods;
+use App\Models\Admin\GoodsSku;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Mavinoo\Batch\Batch;
 
 class GoodsController extends AdminController
 {
@@ -29,20 +34,28 @@ class GoodsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('goods_code', __('Goods code'));
         $grid->column('goods_name', __('Goods name'));
-        $grid->column('cate_id_one', __('Cate id one'));
-        $grid->column('cate_id_two', __('Cate id two'));
-        $grid->column('attribute_list', __('Attribute list'));
-        $grid->column('vendor_id', __('Vendor id'));
+        $grid->column('cate_id_one', __('分类'))->display(function(){
+            $cate1 = Category::where('id',$this->cate_id_one)->first();
+            $cate2 = Category::where('id',$this->cate_id_two)->first();
+            return $cate1->cate_name .'/'.$cate2->cate_name;
+        });
+
+//        $grid->column('attribute_list', __('Attribute list'));
+//        $grid->column('vendor_id', __('Vendor id'));
         $grid->column('goods_sales', __('Goods sales'));
-        $grid->column('goods_smallpic', __('Goods smallpic'));
-        $grid->column('goods_bigpic', __('Goods bigpic'));
-        $grid->column('goods_details', __('Goods details'));
+        $grid->column('goods_main', __('Goods main'))->display(function(){
+            return '<img src="'.$this->goods_main.'"/>';
+        });
+//        $grid->column('goods_details', __('Goods details'));
         $grid->column('is_hot', __('Is hot'));
         $grid->column('status', __('Status'));
         $grid->column('sort_weight', __('Sort weight'));
-        $grid->column('created_at', __('Created at'));
+//        $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        $grid->filter(function ($filter) {
+            $filter->equal('goods_code',__('Goods code'));
+            $filter->equal('goods_name',__('Goods name'));
+        });
         return $grid;
     }
 
@@ -56,19 +69,34 @@ class GoodsController extends AdminController
     {
         $show = new Show(Goods::findOrFail($id));
 
-        $show->field('id', __('Id'));
+//        $show->field('id', __('Id'));
         $show->field('goods_code', __('Goods code'));
         $show->field('goods_name', __('Goods name'));
-        $show->field('cate_id_one', __('Cate id one'));
-        $show->field('cate_id_two', __('Cate id two'));
-        $show->field('attribute_list', __('Attribute list'));
-        $show->field('vendor_id', __('Vendor id'));
+        $show->field('cate_id_one', __('Cate id one'))->as(function($cate_id_one){
+            $cate = Category::where('id',$this->cate_id_one)->first();
+            return $cate->cate_name;
+        });
+        $show->field('cate_id_two', __('Cate id two'))->as(function($cate_id_two){
+            $cate = Category::where('id',$this->cate_id_two)->first();
+            return $cate->cate_name;
+        });
+        $show->json('sku','商品SKU')->as(function(){
+            return Goods::getSkus($this->id);
+        });
+//        $show->sku('sku', __('Attribute list'));
+//        $show->field('vendor_id', __('Vendor id'));
         $show->field('goods_sales', __('Goods sales'));
-        $show->field('goods_smallpic', __('Goods smallpic'));
-        $show->field('goods_bigpic', __('Goods bigpic'));
-        $show->field('goods_details', __('Goods details'));
-        $show->field('is_hot', __('Is hot'));
-        $show->field('status', __('Status'));
+        $show->field('goods_main', __('Goods main'))->image('','100','100');
+        $show->field('goods_images', __('Goods images'))->carousel(500,200);
+        $show->field('goods_details', __('Goods details'))->as(function(){
+            return htmlspecialchars($this->goods_details);
+        });
+        $show->field('is_hot', __('Is hot'))->as(function(){
+            return $this->is_hot? '是':'否';
+        });
+        $show->field('status', __('Status'))->as(function(){
+            return $this->status? '正常':'禁用';
+        });
         $show->field('sort_weight', __('Sort weight'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -83,22 +111,125 @@ class GoodsController extends AdminController
      */
     protected function form()
     {
+
         $form = new Form(new Goods());
+        $form->text('goods_code', __('Goods code'))->rules('required|numeric|min:100');
+        $form->text('goods_name', __('Goods name'))->rules('required');
+        $form->select('cate_id_one', __('Cate id one'))->options('/admin/api/cate/0')->load('cate_id_two','/admin/api/cate/0');
+        $form->select('cate_id_two', __('Cate id two'));
 
-        $form->text('goods_code', __('Goods code'));
-        $form->text('goods_name', __('Goods name'));
-        $form->number('cate_id_one', __('Cate id one'));
-        $form->number('cate_id_two', __('Cate id two'));
-        $form->textarea('attribute_list', __('Attribute list'));
-        $form->number('vendor_id', __('Vendor id'));
-        $form->number('goods_sales', __('Goods sales'));
-        $form->text('goods_smallpic', __('Goods smallpic'));
-        $form->text('goods_bigpic', __('Goods bigpic'));
-        $form->textarea('goods_details', __('Goods details'));
-        $form->number('is_hot', __('Is hot'));
-        $form->number('status', __('Status'))->default(1);
-        $form->number('sort_weight', __('Sort weight'));
+        $form->sku('sku','商品SKU')->default(function($form){
+            if ($form->isEditing()) {
+                return Goods::getSkus($form->model()->id);
+            }
+        });
+        $form->number('vendor_id', __('Vendor id'))->default(1);
+        $form->image('goods_main', __('Goods main'))->uniqueName();
+        $form->multipleImage('goods_images', __('Goods images'))->uniqueName();
+        $form->editor('goods_details',__('Goods Details'));
+        $form->radio('status', __('Status'))->options([0 => '禁用', 1=> '正常'])->default(1);
+        $form->currency('goods_price', __('Goods price'))->symbol('$');
+        $form->number('goods_stock', __('Goods stock'));
+//        $form->number('sort_weight', __('Sort weight'));
+        $form->slider('sort_weight', __('Sort weight'))->options([
+            'max'       => 300,
+            'min'       => 1,
+            'step'      => 1,
+            'postfix'   => '排序'
+        ]);
 
+        $form->saved(function($form){
+
+            $skuData = json_decode($form->sku);
+            if ($skuData->type =='many') {
+                $goodsSkus = $skuData->sku;
+                $insertGoodsSkus = [];
+                foreach ($goodsSkus as $k=>$sku) {
+                    $insertGoodsSkus[$k]['goods_id'] = $form->model()->id;
+                    $insertGoodsSkus[$k]['goods_price'] = $sku->price;
+                    $insertGoodsSkus[$k]['goods_stock'] = $sku->stock;
+                    $insertGoodsSkus[$k]['spec_pic'] = $sku->pic;
+                    unset($sku->pic,$sku->price,$sku->stock,$sku->id);
+                    $insertGoodsSkus[$k]['goods_specs'] = json_encode($sku,JSON_UNESCAPED_UNICODE);
+                    $insertGoodsSkus[$k]['specs_key'] = $k;
+                }
+
+                GoodsSku::insertBatch($insertGoodsSkus,$form->model()->id);
+
+            }
+        });
         return $form;
+    }
+
+    /**
+     * $updateGoodsSkus = [];
+    $insertGoodsSkus = [];
+    foreach ($goodsSkus as $k=>$sku) {
+    if ($form->isEditing() && $sku->id) {
+    $updateGoodsSkus[$k]['id'] = $sku->id;
+    $updateGoodsSkus[$k]['goods_id'] = $form->model()->id;
+    $updateGoodsSkus[$k]['goods_price'] = $sku->price;
+    $updateGoodsSkus[$k]['goods_stock'] = $sku->stock;
+    $updateGoodsSkus[$k]['spec_pic'] = $sku->pic;
+    unset($sku->pic,$sku->price,$sku->stock);
+    $updateGoodsSkus[$k]['goods_specs'] = json_encode($sku,JSON_UNESCAPED_UNICODE);
+    $updateGoodsSkus[$k]['specs_key'] = $k;
+    } else {
+    $insertGoodsSkus[$k]['goods_id'] = $form->model()->id;
+    $insertGoodsSkus[$k]['goods_price'] = $sku->price;
+    $insertGoodsSkus[$k]['goods_stock'] = $sku->stock;
+    $insertGoodsSkus[$k]['spec_pic'] = $sku->pic;
+    unset($sku->pic,$sku->price,$sku->stock);
+    $insertGoodsSkus[$k]['goods_specs'] = json_encode($sku,JSON_UNESCAPED_UNICODE);
+    $insertGoodsSkus[$k]['specs_key'] = $k;
+    }
+
+    }
+    //                var_dump($insertGoodsSkus);
+    //                dd($updateGoodsSkus);
+    if (!empty($updateGoodsSkus)) {
+    $model = new GoodsSku;
+    $res = batch()->update($model,$updateGoodsSkus,'id');
+    } else {
+    $res = GoodsSku::insertBatch($insertGoodsSkus);
+    }
+    if (!$res) {
+    throw new \Exception('产生错误！！');
+    }
+     */
+
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function uploadSku(Request $request)
+    {
+        if($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('public/images');
+
+            // 返回格式
+            return ['url'=> Storage::url($path)];
+        }
+    }
+
+    /**
+     * 详情图
+     * @param Request $request
+     * @return array
+     */
+    public function uploadDetails(Request $request)
+    {
+        $urls = [];
+
+        foreach ($request->file() as $file) {
+            $urls[] = Storage::url($file->store('public/images'));
+        }
+
+        return [
+            "errno" => 0,
+            "data"  => $urls,
+        ];
     }
 }

@@ -26,6 +26,7 @@ Homestead.json
 /node_modules
 /public/hot
 /public/storage
+/public/uploads
 /storage/*.key
 /vendor
 .env
