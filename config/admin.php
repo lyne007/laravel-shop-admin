@@ -5,7 +5,7 @@ return [
     /*
      * 站点标题
      */
-    'name' => 'Laravel Shop',
+    'name' => config('base.web_logo'),
 
     /*
      * 页面顶部 Logo
@@ -42,7 +42,7 @@ return [
     /*
      * Laravel-Admin 页面标题
      */
-    'title' => 'Laravel Shop 管理后台',
+    'title' => config('base.web_name'),
 
     /*
      * 是否使用 https
@@ -250,7 +250,21 @@ return [
                 // `/upload`接口用来上传文件，上传逻辑要自己实现，可参考下面的`上传图片`
                 'uploadImgServer' => '/admin/goods/upload-details'
             ]
-        ]
+        ],
+        'configx' => [
+            // Set to `false` if you want to disable this extension
+            'enable' => true,
+            'tabs' => [
+                'base' => '基本设置',
+//                'shop' => '店铺设置',
+                'uplaod' => '上传设置',
+//                'image' => '' // if tab name is empty, get from trans : trans('admin.configx.tabs.image'); tab名称留空则从翻译中获取
+            ],
+            // Whether check group permissions.
+            //if (!Admin::user()->can('confix.tab.base')) {/*hide base tab*/ } .
+            'check_permission' => true,
+            'break_when_errors' => false // do not save anything if have errors
+        ],
     ],
 
 ];

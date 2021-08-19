@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6c8defdc2230db7d0077d9197a6130f",
+    "content-hash": "b84bd0ac2c336f40790197615e048585",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1533,6 +1533,132 @@
             "time": "2021-06-30T20:03:07+00:00"
         },
         {
+            "name": "ichynul/configx",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ichynul/configx.git",
+                "reference": "0e323823641024999f1624d60b4b3856ed045669"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ichynul/configx/zipball/0e323823641024999f1624d60b4b3856ed045669",
+                "reference": "0e323823641024999f1624d60b4b3856ed045669",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": "~1.6",
+                "ichynul/row-table": "^1.1.0",
+                "laravel-admin-ext/config": "^1.0",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ichynul\\Configx\\ConfigxServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ichynul\\Configx\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ichynul",
+                    "email": "ichynul@outlook.com"
+                }
+            ],
+            "description": "laravel-admin extension configx",
+            "homepage": "https://github.com/ichynul/configx",
+            "keywords": [
+                "extension",
+                "laravel-admin"
+            ],
+            "support": {
+                "issues": "https://github.com/ichynul/configx/issues",
+                "source": "https://github.com/ichynul/configx/tree/1.4.3"
+            },
+            "time": "2021-01-11T08:25:20+00:00"
+        },
+        {
+            "name": "ichynul/row-table",
+            "version": "1.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ichynul/row-table.git",
+                "reference": "e032e8849de98d91ab28fe8043f2a0fe8617f448"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ichynul/row-table/zipball/e032e8849de98d91ab28fe8043f2a0fe8617f448",
+                "reference": "e032e8849de98d91ab28fe8043f2a0fe8617f448",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": "~1.6",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ichynul\\RowTable\\RowTableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ichynul\\RowTable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ichynul",
+                    "email": "ichynul@outlook.com"
+                }
+            ],
+            "description": "laravel-admin extension row-table",
+            "homepage": "https://github.com/ichynul/row-table",
+            "keywords": [
+                "extension",
+                "laravel-admin"
+            ],
+            "support": {
+                "issues": "https://github.com/ichynul/row-table/issues",
+                "source": "https://github.com/ichynul/row-table/tree/1.1.9"
+            },
+            "time": "2020-06-08T12:19:21+00:00"
+        },
+        {
             "name": "intervention/image",
             "version": "2.6.1",
             "source": {
@@ -1691,6 +1817,70 @@
                 }
             ],
             "time": "2021-05-10T06:45:43+00:00"
+        },
+        {
+            "name": "laravel-admin-ext/config",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-admin-extensions/config.git",
+                "reference": "5fe99f56758adfd8436ac5d02e83e72a6388dfc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/config/zipball/5fe99f56758adfd8436ac5d02e83e72a6388dfc2",
+                "reference": "5fe99f56758adfd8436ac5d02e83e72a6388dfc2",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": ">=1.6",
+                "laravel/framework": ">=5.5",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "laravel/laravel": "~5.5",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Encore\\Admin\\Config\\ConfigServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Encore\\Admin\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "z-song",
+                    "email": "zosong@126.com"
+                }
+            ],
+            "description": "Config extension for laravel-admin",
+            "homepage": "https://github.com/laravel-admin-extensions/config",
+            "keywords": [
+                "laravel-admin",
+                "setting"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-admin-extensions/config/issues",
+                "source": "https://github.com/laravel-admin-extensions/config/tree/v1.1"
+            },
+            "time": "2019-12-11T02:31:22+00:00"
         },
         {
             "name": "laravel-admin-ext/log-viewer",

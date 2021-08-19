@@ -47,7 +47,7 @@ class Links
     </ul>
 </li>
 <li>
-    <a href="#">
+    <a href="/admin/configx/edit">
       <i class="fa fa-gears"></i>
       <span>系统设置</span>
     </a>
